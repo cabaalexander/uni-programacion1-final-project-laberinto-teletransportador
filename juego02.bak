@@ -1,0 +1,986 @@
+program juego02;
+uses crt;
+Var
+    cc,ff,cc2,ff2 :integer;
+    t :char;
+
+procedure cuadro;
+Var
+    c1,f1,c2,f2 :integer;
+Begin
+f1:=2;
+c2:=3;
+    For c1:=3 to 37 Do
+      begin
+        //delay(50);
+        gotoxy(c1,f1); write('อ');
+        gotoxy(c1,f1+20); write('อ');
+      end;
+    For f2:=f1 to f1+20 Do
+      begin
+        gotoxy(c2,f2); write('บ');
+        gotoxy(c1,f2); write('บ');
+      end;
+    gotoxy(c1,f1); write('ป');
+    gotoxy(c1,f1+20); write('ผ');
+    gotoxy(c2,f1); write('ษ');
+    gotoxy(c2,f1+20); write('ศ');
+    //Salida
+//    gotoxy(c1,f1+8); write('ศอ');
+    gotoxy(c1,f1+9); write('ศ');
+    gotoxy(c1,f1+10); write(' => Salida =>');
+    gotoxy(c1,f1+11); write('ษ');
+end;
+
+procedure figura(c,f :integer);
+Begin
+    gotoxy(c,f); write('   ');
+    gotoxy(c,f+1); write(' ',CHR(1),' ');
+    gotoxy(c,f+2); write('   ');
+End;
+
+procedure obstaculos;
+Var
+    c,f,x,y,x1,y1,x2,y2,x3,y3 :integer;
+Begin
+f:=2;
+c:=3;
+    gotoxy(c,f+4);  write('ฬอ');
+    gotoxy(c,f+8);  write('ฬออออป');
+    gotoxy(c,f+12); write('ฬออออผ');
+    gotoxy(c+30,f+12); write('ศอออน');
+    gotoxy(c,f+16); write('ฬอออออออออ');
+    gotoxy(c+4,f);  write('ห');
+    gotoxy(c+10,f+4);write('ป');
+    gotoxy(c+10,f+20);write('ส');
+    gotoxy(c+15,f); write('ห');
+    gotoxy(c+20,f+8); write('ส');
+    gotoxy(c+21,f+8); write('ออออ');
+    gotoxy(c+20,f+4); write('ษ');
+    gotoxy(c+30,f+4); write('ป');
+    gotoxy(c+30,f+8); write('ฬ');
+    gotoxy(c+31,f+8); write('อออน');
+    gotoxy(c+25,f+8); write('ป');
+    For x:=5 to 12 Do
+      begin
+        gotoxy(x,f+4); write('อ');
+      end;
+    gotoxy(c+4,f+4);write('ส');
+    For y:=3 to 5 Do //la que tranca la carita .____.
+      begin
+        gotoxy(c+4,y); write('บ');
+        gotoxy(c+15,y); write('บ');
+      end;
+    For y1:=7 to 21 Do //primera raya larga .____.
+      begin
+        gotoxy(c+10,y1); write('บ');
+      end;
+    gotoxy(c+10,f+16); write('น');
+    gotoxy(c+10,f+8);  write('ฬ');
+    For x1:=11 to 13 Do //x=y  //el medio
+      begin
+        gotoxy(c+5,x1); write('บ');
+        gotoxy(c+30,x1); write('บ');
+      end;
+    For y2:=7 to 9 Do //la de arriba del medio
+      begin
+        gotoxy(c+20,y2); write('บ');
+        gotoxy(c+30,y2); write('บ');
+      end;
+    For x2:=14 to 22 Do
+      begin
+        gotoxy(x2,f+8); write('อ');
+        gotoxy(x2+10,f+4); write('อ');
+      end;
+    For y3:=11 to 17 Do //otra raya larga
+      begin
+        gotoxy(c+15,y3); write('บ');
+        gotoxy(c+25,y3); write('บ');
+        gotoxy(c+25,f+16); write('ศ');
+        gotoxy(c+26,f+16); write('อออหออออน');
+        gotoxy(c+15,f+8); write('ห');
+        gotoxy(c+15,f+16); write('ศ');
+        gotoxy(c+16,f+16); write('อออออ');
+      end;
+    For x3:=19 to 21 Do
+      begin
+        gotoxy(c+29,x3); write('บ');
+      end;
+    gotoxy(c+29,x3+1); write('ส');
+End;
+
+procedure fin;
+Const
+t= 'JUEGO TERMINADO';
+t2= 'Precione ESC Para Salir.';
+Var
+    x,y,y2,c,n,q,a,h :integer;
+Begin
+n:=30;
+clrscr;
+    //writeln('Digite Palabra: '); gotoxy(1,5); read(t);
+    For x:=1 to length(t) Do
+      begin
+        For y:=5 to 20 Do
+          begin
+            delay(10);
+            textcolor(yellow);
+            gotoxy(x,y-1); write(' ');
+            gotoxy(x,y); write(t[x]);
+          end;
+      end;
+    For c:=length(t) downto 1 Do
+      begin
+        For y2:=c to n Do
+          begin
+            Delay(10);
+            textcolor(lightblue);
+            gotoxy(y2,y); write(' ',t[c]);
+          end;
+        dec(n);
+      end;
+    {For h:=1 to length(t2) Do
+      begin
+        For q:=a to 30 Do
+          begin
+            delay(25);
+            gotoxy(a,5); write(' ',t2[a]);
+          end;}
+     textcolor(lightred);
+     gotoxy(10,10); write(t2);
+End;
+
+
+
+{Cuerpo}
+Begin
+cc:=4;//figura
+ff:=3;//figura
+clrscr;
+    figura(cc,ff);
+    cuadro;//F:=2,C:=3
+    obstaculos;
+    textcolor(yellow);
+    gotoxy(5,16); write(CHR(5));
+    gotoxy(15,12); write(CHR(5));
+    textcolor(blue);
+    gotoxy(26,12); write(CHR(6));
+    gotoxy(35,20); write(CHR(6));
+    textcolor(lightgreen);
+    gotoxy(20,16); write(CHR(14));
+    gotoxy(35,16); write(CHR(14));
+    textcolor(magenta);
+    gotoxy(25,8); write(CHR(15));
+    gotoxy(35,12); write(CHR(15));
+    textcolor(lightred);
+    gotoxy(4,2); write('อออ');
+    gotoxy(10,22); write('อออ');
+    gotoxy(37,7); write('บ');
+    gotoxy(37,8); write('บ');
+    gotoxy(37,9); write('บ');
+    textcolor(white);
+
+    gotoxy(39,2); write('Instrucciones:');
+    gotoxy(43,4); write('1)Las paredes rojas al te colocan');
+    gotoxy(45,5); write('al extremo contrario del mapa.');
+    gotoxy(43,6); write('2)Las figuras del mismo color te');
+    gotoxy(45,7); write('teletransportan a la otra de su');
+    gotoxy(45,8); write('mismo color.');
+    textcolor(lightblue);
+    gotoxy(37,24); write('Created By: Nikasol ธ');
+    textcolor(white);
+    gotoxy(38,15); write(' Nombre:');
+    gotoxy(38,16); write('  Nicanor Alexander De La Cruz Caba.');
+    gotoxy(38,17); write(' Matricula:');
+    gotoxy(38,18); write('  2012-0171.');
+Repeat
+    t:=readkey;
+    Case t Of
+    #72: begin {Arriba}
+          //figura_u(cc,ff);
+           If ff>2 then
+             ff:=ff-1
+           {else
+            begin
+             ff:=19;
+             gotoxy(cc+1,ff-15); write(' ');
+            end;}
+           end;
+    #80: begin {Abajo}
+          //figura_d(cc,ff);
+           If ff<20 then
+             ff:=ff+1
+           {else
+            begin
+             ff:=3;
+             gotoxy(cc+1,ff+17); write(' ');
+            end;}
+         end;
+    #75: begin {Izquierda}
+          //figura_l(cc,ff);
+           If cc>3 then
+             cc:=cc-1
+           {else
+            begin
+             cc:=34;
+             gotoxy(cc-29,ff+1); write(' ');
+            end;}
+         end;
+    #77: begin {Derecha}
+          //figura_r(cc,ff);
+           If cc<48 then
+             cc:=cc+1
+           {else
+            begin
+             cc:=4;
+             gotoxy(cc+31,ff+1); write(' ');
+            end;}
+         end;
+    end;//case
+
+
+{Limites De El Mundo}  // -.-'''
+    If (cc=4) and (ff=2) then
+      begin
+        ff:=19;
+        gotoxy(5,4); write(' ');
+      end;
+    If (cc=3) and (ff=3) then
+      cc:=4;
+    If (cc=4) and (ff=20) then
+      ff:=19;
+    If (cc=5) and (ff=20) then
+      ff:=19;
+    If (cc=6) and (ff=20) then
+      ff:=19;
+    If (cc=7) and (ff=20) then
+      ff:=19;
+    If (cc=8) and (ff=20) then
+      ff:=19;
+    If (cc=9) and (ff=20) then
+      ff:=19;
+    If (cc=10) and (ff=20) then
+      begin
+        ff:=4;
+        gotoxy(11,20); write(' ');
+      end;
+    If (cc=3) and (ff=19) then
+      cc:=4;
+
+    If (cc=8) and (ff=2) then
+      ff:=3;
+    If (cc=9) and (ff=2) then
+      ff:=3;
+    If (cc=10) and (ff=2) then
+      ff:=3;
+    If (cc=11) and (ff=2) then
+      ff:=3;
+    If (cc=12) and (ff=2) then
+      ff:=3;
+    If (cc=13) and (ff=2) then
+      ff:=3;
+    If (cc=14) and (ff=2) then
+      ff:=3;
+    If (cc=15) and (ff=2) then
+      ff:=3;
+
+    If (cc=19) and (ff=2) then
+      ff:=3;
+    If (cc=20) and (ff=2) then
+      ff:=3;
+    If (cc=21) and (ff=2) then
+      ff:=3;
+    If (cc=22) and (ff=2) then
+      ff:=3;
+    If (cc=23) and (ff=2) then
+      ff:=3;
+    If (cc=24) and (ff=2) then
+      ff:=3;
+    If (cc=25) and (ff=2) then
+      ff:=3;
+    If (cc=26) and (ff=2) then
+      ff:=3;
+    If (cc=27) and (ff=2) then
+      ff:=3;
+    If (cc=28) and (ff=2) then
+      ff:=3;
+    If (cc=29) and (ff=2) then
+      ff:=3;
+    If (cc=30) and (ff=2) then
+      ff:=3;
+    If (cc=31) and (ff=2) then
+      ff:=3;
+    If (cc=32) and (ff=2) then
+      ff:=3;
+    If (cc=33) and (ff=2) then
+      ff:=3;
+    If (cc=34) and (ff=2) then
+      ff:=3;
+    If (cc=35) and (ff=2) then
+      ff:=3;
+
+    If (cc=35) and (ff=3) then
+      cc:=34;
+    If (cc=35) and (ff=4) then
+      cc:=34;
+    If (cc=35) and (ff=5) then
+      cc:=34;
+    If (cc=35) and (ff=6) then
+      cc:=34;
+
+    If (cc=35) and (ff=7) then
+      begin
+        cc:=4;
+        ff:=7;
+        gotoxy(35,8); write(' ');
+      end;
+
+    If (cc=14) and (ff=20) then
+      ff:=19;
+    If (cc=15) and (ff=20) then
+      ff:=19;
+    If (cc=16) and (ff=20) then
+      ff:=19;
+    If (cc=17) and (ff=20) then
+      ff:=19;
+    If (cc=18) and (ff=20) then
+      ff:=19;
+    If (cc=19) and (ff=20) then
+      ff:=19;
+    If (cc=20) and (ff=20) then
+      ff:=19;
+    If (cc=21) and (ff=20) then
+      ff:=19;
+    If (cc=22) and (ff=20) then
+      ff:=19;
+    If (cc=23) and (ff=20) then
+      ff:=19;
+    If (cc=24) and (ff=20) then
+      ff:=19;
+    If (cc=25) and (ff=20) then
+      ff:=19;
+    If (cc=26) and (ff=20) then
+      ff:=19;
+    If (cc=27) and (ff=20) then
+      ff:=19;
+    If (cc=28) and (ff=20) then
+      ff:=19;
+    If (cc=29) and (ff=20) then
+      ff:=19;
+
+    If (cc=33) and (ff=20) then
+      ff:=19;
+
+
+
+{Condiciones Verticales}
+    If (cc=3) and (ff=7) then
+      cc:=4;
+    If (cc=5) and (ff=3) then
+      cc:=4;
+    If (cc=7) and (ff=3) then
+      cc:=8;
+    If (cc=6) and (ff=3) then
+      cc:=4;
+
+
+    If (cc=16) and (ff=3) then
+      cc:=15;
+    If (cc=18) and (ff=3) then
+      cc:=19;
+    If (cc=17) and (ff=3) then
+      cc:=15;
+
+     If (cc=16) and (ff=4) then
+      cc:=15;
+    If (cc=18) and (ff=4) then
+      cc:=19;
+    If (cc=17) and (ff=4) then
+      cc:=15;
+
+     If (cc=16) and (ff=5) then
+      cc:=15;
+    If (cc=18) and (ff=5) then
+      cc:=19;
+    If (cc=17) and (ff=5) then
+      begin
+        cc:=15;
+        gotoxy(18,7); write(' ');
+      end;
+
+    If (cc=11) and (ff=7) then    //ojo
+      cc:=10;
+    If (cc=13) and (ff=7) then
+      cc:=14;
+    If (cc=13) and (ff=6) then
+      cc:=14;
+    If (cc=13) and (ff=5) then
+      cc:=14;
+      If (cc=11) and (ff=8) then
+        cc:=10;
+      If (cc=11) and (ff=9) then
+        cc:=10;
+      If (cc=11) and (ff=10) then
+        cc:=10;
+      If (cc=11) and (ff=11) then
+        cc:=10;
+      If (cc=11) and (ff=12) then
+        cc:=10;
+      If (cc=11) and (ff=13) then
+        cc:=10;
+      If (cc=11) and (ff=14) then
+        cc:=10;
+      If (cc=11) and (ff=15) then
+        cc:=10;
+
+      If (cc=11) and (ff=19) then
+        cc:=10;
+
+
+    If (cc=12) and (ff=19) then     //OJO
+      ff:=3;
+    If (cc=13) and (ff=19) then
+      cc:=14;
+    If (cc=11) and (ff=19) then
+      cc:=10;
+
+    If (cc=21) and (ff=7) then
+      cc:=20;
+    If (cc=21) and (ff=6) then
+      cc:=20;
+    If (cc=21) and (ff=5) then
+      cc:=20;
+    If(cc=23) and (ff=7) then
+      cc:=24;
+
+    If (cc=31) and (ff=7) then
+      cc:=30;
+    If (cc=31) and (ff=8) then
+      cc:=30;
+    If (cc=31) and (ff=9) then
+      cc:=30;
+    If (cc=31) and (ff=10) then
+      cc:=30;
+    If (cc=31) and (ff=11) then
+      cc:=30;
+    If (cc=31) and (ff=12) then
+      cc:=30;
+    If (cc=31) and (ff=13) then
+      cc:=30;
+    If (cc=31) and (ff=14) then
+      cc:=30;
+    If (cc=33) and (ff=7) then
+      cc:=34;
+    If (cc=33) and (ff=6) then
+      cc:=34;
+    If (cc=33) and (ff=5) then
+      cc:=34;
+
+    If (cc=8) and (ff=9) then
+      cc:=9;
+    If (cc=8) and (ff=10) then
+      cc:=9;
+    If (cc=8) and (ff=11) then
+      cc:=9;
+    If (cc=8) and (ff=12) then
+      cc:=9;
+    If (cc=8) and (ff=13) then
+      cc:=9;
+    If (cc=8) and (ff=14) then
+      cc:=9;
+
+    If (cc=13) and (ff=11) then
+      cc:=14;
+    If (cc=13) and (ff=12) then
+      cc:=14;
+    If (cc=13) and (ff=13) then
+      cc:=14;
+    If (cc=13) and (ff=14) then
+      cc:=14;
+    If (cc=13) and (ff=15) then
+      cc:=14;
+    If (cc=13) and (ff=16) then
+      cc:=14;
+    If (cc=13) and (ff=17) then
+      cc:=14;
+    If (cc=13) and (ff=18) then
+      cc:=14;
+    If (cc=13) and (ff=19) then
+      cc:=14;
+
+    If (cc=16) and (ff=11) then
+      cc:=15;
+    If (cc=16) and (ff=12) then
+      cc:=15;
+    If (cc=16) and (ff=13) then
+      cc:=15;
+    If (cc=16) and (ff=14) then
+      cc:=15;
+    If (cc=16) and (ff=15) then
+      cc:=15;
+    If (cc=16) and (ff=16) then
+      cc:=15;
+    If (cc=16) and (ff=17) then
+      cc:=15;
+    If (cc=16) and (ff=18) then
+      cc:=15;
+
+    If (cc=18) and (ff=15) then
+      cc:=19;
+    If (cc=18) and (ff=14) then
+      cc:=19;
+    If (cc=18) and (ff=13) then
+      cc:=19;
+    If (cc=18) and (ff=12) then
+      cc:=19;
+    If (cc=18) and (ff=11) then
+      cc:=19;
+
+    If (cc=26) and (ff=11) then
+      cc:=25;
+    If (cc=26) and (ff=12) then
+      cc:=25;
+    If (cc=26) and (ff=13) then
+      cc:=25;
+    If (cc=26) and (ff=14) then
+      cc:=25;
+    If (cc=26) and (ff=15) then
+      cc:=25;
+    If (cc=26) and (ff=16) then
+      cc:=25;
+    If (cc=26) and (ff=17) then
+      cc:=25;
+    If (cc=26) and (ff=18) then
+      cc:=25;
+
+    If (cc=28) and (ff=9) then
+      cc:=29;
+    If (cc=28) and (ff=10) then
+      cc:=29;
+    If (cc=28) and (ff=11) then
+      cc:=29;
+    If (cc=28) and (ff=12) then
+      cc:=29;
+    If (cc=28) and (ff=13) then
+      cc:=29;
+    If (cc=28) and (ff=14) then
+      cc:=29;
+    If (cc=28) and (ff=15) then
+      cc:=29;
+
+    If (cc=30) and (ff=19) then
+      cc:=29;
+
+    If (cc=32) and (ff=19) then
+      cc:=33;
+
+{Condiciones Orzontales}
+    If (ff=4) and (cc=4) then
+      ff:=3;
+
+    If (ff=4) and (cc=8) then
+      ff:=3;
+    If (ff=4) and (cc=9) then
+      ff:=3;
+    If (ff=4) and (cc=10) then
+      ff:=3;
+    If (ff=4) and (cc=11) then
+      ff:=3;
+    If (ff=4) and (cc=12) then
+      ff:=3;
+    If (ff=4) and (cc=13) then
+      ff:=3;
+      If (ff=6) and (cc=4) then
+        ff:=7;
+      If (ff=6) and (cc=5) then
+        ff:=7;
+      If (ff=6) and (cc=6) then
+        ff:=7;
+      If (ff=6) and (cc=7) then
+        ff:=7;
+      If (ff=6) and (cc=8) then
+        ff:=7;
+      If (ff=6) and (cc=9) then
+        ff:=7;
+      If (ff=6) and (cc=10) then
+        ff:=7;
+
+    If (ff=4) and (cc=21) then
+      ff:=3;
+    If (ff=4) and (cc=22) then
+      ff:=3;
+    If (ff=4) and (cc=23) then
+      ff:=3;
+    If (ff=4) and (cc=24) then
+      ff:=3;
+    If (ff=4) and (cc=25) then
+      ff:=3;
+    If (ff=4) and (cc=26) then
+      ff:=3;
+    If (ff=4) and (cc=27) then
+      ff:=3;
+    If (ff=4) and (cc=28) then
+      ff:=3;
+    If (ff=4) and (cc=29) then
+      ff:=3;
+    If (ff=4) and (cc=30) then
+      ff:=3;
+    If (ff=4) and (cc=31) then
+      ff:=3;
+    If (ff=4) and (cc=32) then
+      ff:=3;
+    If (ff=4) and (cc=33) then
+      ff:=3;
+      If (ff=6) and (cc=21) then
+      ff:=7;
+      If (ff=6) and (cc=22) then
+        ff:=7;
+      If (ff=6) and (cc=23) then
+        ff:=7;
+      If (ff=6) and (cc=24) then
+        ff:=7;
+      If (ff=6) and (cc=25) then
+        ff:=7;
+      If (ff=6) and (cc=26) then
+        ff:=7;
+      If (ff=6) and (cc=27) then
+        ff:=7;
+      If (ff=6) and (cc=28) then
+        ff:=7;
+      If (ff=6) and (cc=29) then
+        ff:=7;
+      If (ff=6) and (cc=30) then
+        ff:=7;
+      If (ff=6) and (cc=31) then
+        ff:=7;
+      If (ff=6) and (cc=32) then
+        ff:=7;
+      If (ff=6) and (cc=33) then
+        ff:=7;
+
+      If (cc=14) and (ff=8) then
+        ff:=7;
+      If (cc=15) and (ff=8) then
+        ff:=7;
+      If (cc=16) and (ff=8) then
+        ff:=7;
+      If (cc=17) and (ff=8) then
+        ff:=7;
+      If (cc=18) and (ff=8) then
+        ff:=7;
+      If (cc=19) and (ff=8) then
+        ff:=7;
+      If (cc=20) and (ff=8) then
+        ff:=7;
+
+      If (cc=34) and (ff=8) then
+        ff:=7;
+
+      If (cc=14) and (ff=10) then
+        ff:=11;
+      If (cc=15) and (ff=10) then
+        ff:=11;
+
+      If (cc=4) and (ff=8) then
+        ff:=7;
+      If (cc=5) and (ff=8) then
+        ff:=7;
+      If (cc=6) and (ff=8) then
+        ff:=7;
+      If (cc=7) and (ff=8) then
+        ff:=7;
+      If (cc=8) and (ff=8) then
+        ff:=7;
+
+      If (cc=4) and (ff=14) then
+        ff:=15;
+      If (cc=5) and (ff=14) then
+        ff:=15;
+      If (cc=6) and (ff=14) then
+        ff:=15;
+      If (cc=7) and (ff=14) then
+        ff:=15;
+      If (cc=8) and (ff=14) then
+        ff:=15;
+
+      If (cc=4) and (ff=16) then
+        ff:=15;
+      If (cc=5) and (ff=16) then
+        ff:=15;
+      If (cc=6) and (ff=16) then
+        ff:=15;
+      If (cc=7) and (ff=16) then
+        ff:=15;
+      If (cc=8) and (ff=16) then
+        ff:=15;
+      If (cc=9) and (ff=16) then
+        ff:=15;
+      If (cc=10) and (ff=16) then
+        ff:=15;
+
+      If (cc=4) and (ff=18) then
+        ff:=19;
+      If (cc=5) and (ff=18) then
+        ff:=19;
+      If (cc=6) and (ff=18) then
+        ff:=19;
+      If (cc=7) and (ff=18) then
+        ff:=19;
+      If (cc=8) and (ff=18) then
+        ff:=19;
+      If (cc=9) and (ff=18) then
+        ff:=19;
+      If (cc=10) and (ff=18) then
+        ff:=19;
+
+      If (cc=17) and (ff=18) then
+        ff:=19;
+      If (cc=18) and (ff=18) then
+        ff:=19;
+      If (cc=19) and (ff=18) then
+        ff:=19;
+      If (cc=20) and (ff=18) then
+        ff:=19;
+      If (cc=21) and (ff=18) then
+        ff:=19;
+      If (cc=22) and (ff=18) then
+        ff:=19;
+      If (cc=23) and (ff=18) then
+        ff:=19;
+        If (cc=19) and (ff=16) then
+          ff:=15;
+        If (cc=20) and (ff=16) then
+          ff:=15;
+        If (cc=21) and (ff=16) then
+          ff:=15;
+        If (cc=22) and (ff=16) then
+          ff:=15;
+        If (cc=23) and (ff=16) then
+          ff:=15;
+
+        If (cc=23) and (ff=17) then //spc
+          cc:=24;
+
+        If (cc=19) and (ff=10) then
+          ff:=11;
+        If (cc=20) and (ff=10) then
+          ff:=11;
+        If (cc=21) and (ff=10) then
+          ff:=11;
+        If (cc=22) and (ff=10) then
+          ff:=11;
+        If (cc=23) and (ff=10) then
+          ff:=11;
+        If (cc=24) and (ff=10) then
+          ff:=11;
+        If (cc=25) and (ff=10) then
+          ff:=11;
+
+        If (cc=34) and (ff=10) then  //salida
+          ff:=11;
+        If (cc=34) and (ff=12) then
+          ff:=11;
+        If (cc=33) and (ff=11) then
+          cc:=34;
+
+        If (cc=4) and (ff=10) then   //trap
+          ff:=11;
+        If (cc=5) and (ff=10) then
+          ff:=11;
+        If (cc=4) and (ff=12) then
+          ff:=11;
+        If (cc=5) and (ff=12) then
+          ff:=11;
+          If (cc=6) and (ff=11) then
+            cc:=5;
+
+        If (cc=24) and (ff=8) then
+          ff:=7;
+        If (cc=25) and (ff=8) then
+          ff:=7;
+        If (cc=26) and (ff=8) then
+          ff:=7;
+        If (cc=27) and (ff=8) then
+          ff:=7;
+        If (cc=28) and (ff=8) then
+          ff:=7;
+
+        If (cc=34) and (ff=14) then
+          ff:=15;
+        If (cc=33) and (ff=14) then
+          ff:=15;
+        If (cc=32) and (ff=14) then
+          ff:=15;
+        If (cc=31) and (ff=14) then
+          ff:=15;
+
+        If (cc=29) and (ff=16) then
+          ff:=15;
+        If (cc=30) and (ff=16) then
+          ff:=15;
+        If (cc=31) and (ff=16) then
+          ff:=15;
+        If (cc=32) and (ff=16) then
+          ff:=15;
+        If (cc=33) and (ff=16) then
+          ff:=15;
+        If (cc=34) and (ff=16) then
+          ff:=15;
+
+        If (cc=27) and (ff=18) then
+          ff:=19;
+        If (cc=28) and (ff=18) then
+          ff:=19;
+        If (cc=29) and (ff=18) then
+          ff:=19;
+
+        If (cc=33) and (ff=18) then
+          ff:=19;
+        If (cc=34) and (ff=18) then
+          ff:=19;
+
+        If (cc=35) and (ff=10) then
+          ff:=11;
+        If (cc=36) and (ff=10) then
+          ff:=11;
+        If (cc=37) and (ff=10) then
+          ff:=11;
+        If (cc=38) and (ff=10) then
+          ff:=11;
+        If (cc=39) and (ff=10) then
+          ff:=11;
+        If (cc=40) and (ff=10) then
+          ff:=11;
+        If (cc=41) and (ff=10) then
+          ff:=11;
+        If (cc=42) and (ff=10) then
+          ff:=11;
+        If (cc=43) and (ff=10) then
+          ff:=11;
+        If (cc=44) and (ff=10) then
+          ff:=11;
+        If (cc=45) and (ff=10) then
+          ff:=11;
+        If (cc=46) and (ff=10) then
+          ff:=11;
+        If (cc=47) and (ff=10) then
+          ff:=11;
+          If (cc=35) and (ff=12) then
+            ff:=11;
+          If (cc=36) and (ff=12) then
+            ff:=11;
+          If (cc=37) and (ff=12) then
+            ff:=11;
+          If (cc=38) and (ff=12) then
+            ff:=11;
+          If (cc=39) and (ff=12) then
+            ff:=11;
+          If (cc=40) and (ff=12) then
+            ff:=11;
+          If (cc=41) and (ff=12) then
+            ff:=11;
+          If (cc=42) and (ff=12) then
+            ff:=11;
+          If (cc=43) and (ff=12) then
+            ff:=11;
+          If (cc=44) and (ff=12) then
+            ff:=11;
+          If (cc=45) and (ff=12) then
+            ff:=11;
+          If (cc=46) and (ff=12) then
+            ff:=11;
+          If (cc=47) and (ff=12) then
+            ff:=11;
+
+
+{Bugs}
+    If (cc=4) and (ff=5) then
+      cc:=34;
+    If (cc=31) and (ff=19) then
+      ff:=3;
+
+{Teleporters}
+    If (cc=4) and (ff=15) then         //uno
+      begin
+        cc:=15;
+        ff:=11;
+        gotoxy(6,16); write(' ');
+      end;
+    If (cc=14) and (ff=11) then
+      begin
+        cc:=5;
+        ff:=15;
+        gotoxy(16,12); write(' ');
+        gotoxy(15,13); write(' ');
+      end;                             //fin
+
+    If (cc=19) and (ff=15) then        //dos
+      begin
+        cc:=33;
+        ff:=15;
+        gotoxy(21,16); write(' ');
+        gotoxy(20,15); write(' ');
+      end;
+    If (cc=34) and (ff=15) then
+      begin
+        cc:=20;
+        ff:=15;
+        gotoxy(34,16); write(' ');
+      end;                             //fin
+
+    If (cc=25) and (ff=11) then        //tres
+      begin
+        cc:=33;
+        ff:=19;
+        gotoxy(25,12); write(' ');
+        gotoxy(26,13); write(' ');
+      end;
+    If (cc=34) and (ff=19) then
+      begin
+        cc:=24;
+        ff:=11;
+        gotoxy(34,20); write(' ');
+      end;                             //fin
+
+    If (cc=24) and (ff=7) then
+      begin
+        cc:=35;
+        ff:=11;
+        gotoxy(26,8); write(' ');
+      end;
+
+    If (cc=47) and (ff=11) then
+      begin
+        fin;
+      end;
+
+    If (cc=34) and (ff=11) then
+      begin
+        cc:=25;
+        ff:=7;
+        gotoxy(36,12); write(' ');
+      end;
+
+
+    figura(cc,ff);
+    textcolor(yellow);
+    gotoxy(5,16); write(CHR(5));
+    gotoxy(15,12); write(CHR(5));
+    textcolor(blue);
+    gotoxy(26,12); write(CHR(6));
+    gotoxy(35,20); write(CHR(6));
+    textcolor(lightgreen);
+    gotoxy(20,16); write(CHR(14));
+    gotoxy(35,16); write(CHR(14));
+    textcolor(magenta);
+    gotoxy(25,8); write(CHR(15));
+    gotoxy(35,12); write(CHR(15));
+    textcolor(lightred);
+    gotoxy(4,2); write('อออ');
+    gotoxy(10,22); write('อออ');
+    gotoxy(37,7); write('บ');
+    gotoxy(37,8); write('บ');
+    gotoxy(37,9); write('บ');
+    textcolor(white);
+Until (t=#27);
+End.
